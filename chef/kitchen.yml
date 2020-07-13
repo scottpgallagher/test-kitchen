@@ -1,0 +1,26 @@
+---
+driver:
+  name: vagrant
+
+verifier:
+  name: inspec
+
+provisioner:
+  name: chef_zero
+  chef_license: accept
+  always_update_cookbooks: true
+
+platforms:
+  - name: centos-7
+    driver:
+      retryable_tries: 200
+
+suites:
+  - name: local  
+    lifecycle:
+      pre_verify:
+        - inspec compliance login https://sgallagher-a2.chef-demo.com --user admin --insecure --token "m93JFuuUYR5xKMooYPKq5gpuLLo="
+    verifier:
+      inspec_tests: 
+        - name: Red Hat Enterprise Linux 7 Security Technical Implementation Guide CAT I Only
+          compliance: admin/stig-redhatenterpriselinux7-cationly
