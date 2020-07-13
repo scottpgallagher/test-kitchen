@@ -1,0 +1,36 @@
+---
+driver:
+  name: ec2
+  security_group_ids: ["sg-0817c7607c3f06e8d"]
+  region: us-west-2
+  availability_zone: a
+  subnet_id: subnet-099c51bfdb32cc9a3
+  instance_type: t2.medium
+verifier:
+  name: inspec
+provisioner:
+  name: chef_zero
+  chef_license: accept
+platforms:
+  - name: rhel-7
+    driver:
+      retryable_tries: 200
+# Version pinning to ensure correct version. Clear USERDIR\.inspec\cache folder
+# if you want to remove pinning and always use latest version.
+suites:
+  - name: gitlab
+    lifecycle:
+      pre_verify:
+        - inspec compliance login https://URL_TO_AUTOMATE.yourdomain.com --user USER_HERE --insecure --token "INSPEC_TOKEN_HERE"
+    verifier:
+      inspec_tests: 
+        - name: PROFILE_NAME
+          compliance: USER/PROFILE_NAME#0.1.4
+  - name: local  
+    lifecycle:
+      pre_verify:
+        - inspec compliance login https://URL_TO_AUTOMATE.yourdomain.com --user USER_HERE --insecure --token "INSPEC_TOKEN_HERE"
+    verifier:
+      inspec_tests: 
+        - name: PROFILE_NAME
+          compliance: USER/PROFILE_NAME#0.1.4
