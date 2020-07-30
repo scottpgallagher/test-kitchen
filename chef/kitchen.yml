@@ -15,12 +15,17 @@ platforms:
     driver:
       retryable_tries: 200
 
+# suites:
+#   - name: local  
+#     lifecycle:
+#       pre_verify:
+#         - inspec compliance login https://sgallagher-a2.chef-demo.com --user admin --insecure --token "m93JFuuUYR5xKMooYPKq5gpuLLo="
+#     verifier:
+#       inspec_tests: 
+#         - name: Red Hat Enterprise Linux 7 Security Technical Implementation Guide CAT I Only
+#           compliance: admin/stig-redhatenterpriselinux7-cationly
 suites:
-  - name: local  
-    lifecycle:
-      pre_verify:
-        - inspec compliance login https://sgallagher-a2.chef-demo.com --user admin --insecure --token "m93JFuuUYR5xKMooYPKq5gpuLLo="
+  - name: default
     verifier:
-      inspec_tests: 
-        - name: Red Hat Enterprise Linux 7 Security Technical Implementation Guide CAT I Only
-          compliance: admin/stig-redhatenterpriselinux7-cationly
+      inspec_tests:
+        - test/integration/default
