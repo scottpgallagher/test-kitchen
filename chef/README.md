@@ -1,13 +1,9 @@
-###### Running the Tests:
+This repo is used for showing Test Driven Development (TDD) with chef (cookbook and inspec) and test kitchen
 
-0. Make sure you are within the `chef` folder
+# kitchen create
 
-1. `kitchen converge`  
+# kitchen converge
 
-2. `kitchen verify`  
+# kitchen verify
 
-3. Test for Compliance. Change the test within the `kitchen.yml` file  
-
-4. `kitchen verify`  
-
-5. `kitchen destroy`  
+# kitchen destroy
